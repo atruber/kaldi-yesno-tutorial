@@ -3,6 +3,7 @@
 import os
 import os.path
 import sys
+import subprocess
 
 zeroes = []
 ones = []
@@ -26,8 +27,12 @@ with open('data/train_yesno/text', 'w') as train_text, open('data/test_yesno/tex
     test_text.write(text(ones))
 
 # finish this method
-def wav_scp():
-    pass
+def wav_scp(filenames):
+    results= []
+    for filename in filenames:
+        basename = filename.split('.')[0]
+        results.append("{} {}".format(basename.split('.')[0], 'waves_yesno/'+filename))
+    return '\n'.join(sorted(results))
 
 with open('data/train_yesno/wav.scp', 'w') as train_text, open('data/test_yesno/wav.scp', 'w') as test_text:
     train_text.write(wav_scp(zeroes))
@@ -35,8 +40,12 @@ with open('data/train_yesno/wav.scp', 'w') as train_text, open('data/test_yesno/
 
 
 # finish this method
-def utt2spk():
-    pass
+def utt2spk(filenames):
+    results =[]
+    for filename in filenames:
+        basename = filename.split('.')[0]
+        results.append("{} {}".format(basename.split('.')[0], 'global'))
+    return '\n'.join(sorted(results))
 
 with open('data/train_yesno/utt2spk', 'w') as train_text, open('data/test_yesno/utt2spk', 'w') as test_text:
     train_text.write(utt2spk(zeroes))
@@ -45,5 +54,5 @@ with open('data/train_yesno/utt2spk', 'w') as train_text, open('data/test_yesno/
 
 # finish this method
 # note that, spk2utt can be generate by using Kaldi util, once you have utt2spk file.
-def spk2utt():
+def spk2utt(filenames):
     pass
